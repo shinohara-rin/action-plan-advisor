@@ -1,5 +1,20 @@
 plugins {
 	id 'java-library'
+	id 'maven-publish'
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		maven {
+			name = 'buildRepository'
+			url = layout.buildDirectory.dir('repository')
+		}
+	}
 }
 
 group = 'ai.moeru'
@@ -29,4 +44,3 @@ tasks.withType(JavaCompile).configureEach {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
